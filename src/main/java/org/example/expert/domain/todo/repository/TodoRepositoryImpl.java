@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -50,5 +51,13 @@ public class TodoRepositoryImpl implements TodoRepositoryCustom{
                 .fetchOne();
 
         return new PageImpl<>(todos, pageable, total);
+    }
+
+    @Override
+    public Optional<Todo> findByIdWithUser(Long todoId) {
+        return Optional.ofNullable(queryFactory.selectFrom(todo)
+                .leftJoin(todo.user, user).fetchJoin()
+                .where(todo.id.eq(todoId))
+                .fetchOne());
     }
 }
