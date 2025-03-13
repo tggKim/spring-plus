@@ -1,8 +1,11 @@
 package org.example.expert.domain.manager.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.common.exception.InvalidRequestException;
+import org.example.expert.domain.manager.entity.ManagerLog;
+import org.example.expert.domain.manager.repository.ManagerLogRepository;
 import org.example.expert.domain.manager.dto.request.ManagerSaveRequest;
 import org.example.expert.domain.manager.dto.response.ManagerResponse;
 import org.example.expert.domain.manager.dto.response.ManagerSaveResponse;
@@ -14,23 +17,39 @@ import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.util.ObjectUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class ManagerService {
 
     private final ManagerRepository managerRepository;
     private final UserRepository userRepository;
     private final TodoRepository todoRepository;
+    private final ManagerLogService managerLogService;
 
     @Transactional
     public ManagerSaveResponse saveManager(AuthUser authUser, long todoId, ManagerSaveRequest managerSaveRequest) {
+
+        // 로그에 기록하기 위한 요청시간
+        LocalDateTime saveRequestTime = LocalDateTime.now();
+
+        boolean txActive = TransactionSynchronizationManager.isActualTransactionActive();
+        String currentTransactionName = TransactionSynchronizationManager.getCurrentTransactionName();
+        log.info("saveManager method Transaction active={}", txActive);
+        log.info("현재 트랜잭션 이름 = {}", currentTransactionName);
+
+        managerLogService.saveLog(new ManagerLog(todoId, authUser.getId(), managerSaveRequest.getManagerUserId()));
+
         // 일정을 만든 유저
         User user = User.fromAuthUser(authUser);
         Todo todo = todoRepository.findById(todoId)
