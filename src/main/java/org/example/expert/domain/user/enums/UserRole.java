@@ -1,11 +1,16 @@
 package org.example.expert.domain.user.enums;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.example.expert.domain.common.exception.InvalidRequestException;
 
 import java.util.Arrays;
 
+@Getter
+@RequiredArgsConstructor
 public enum UserRole {
-    ADMIN, USER;
+    ROLE_USER,
+    ROLE_ADMIN;
 
     public static UserRole of(String role) {
         return Arrays.stream(UserRole.values())
@@ -13,4 +18,6 @@ public enum UserRole {
                 .findFirst()
                 .orElseThrow(() -> new InvalidRequestException("유효하지 않은 UerRole"));
     }
+
+
 }
