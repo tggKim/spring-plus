@@ -29,17 +29,6 @@ public class S3Service {
         return getImageUrl(fileName);
     }
 
-    public String updateFile(MultipartFile file, String fileName) throws IOException {
-
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentType(file.getContentType());
-        metadata.setContentLength(file.getSize());
-
-        amazonS3.putObject(bucketName, fileName, file.getInputStream(), metadata);
-
-        return getImageUrl(fileName);
-    }
-
     public void deleteFile(String fileName){
         amazonS3.deleteObject(bucketName, fileName);
     }

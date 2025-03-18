@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PutMapping("/users/images")
-    public void updateUserImage(@AuthenticationPrincipal AuthUser authUser, @RequestParam("file") MultipartFile multipartFile){
-        userService.updateUserImage(authUser, multipartFile);
+    public ResponseEntity<NewUserResponse> updateUserImage(@AuthenticationPrincipal AuthUser authUser, @RequestParam("file") MultipartFile multipartFile){
+        return ResponseEntity.ok(userService.updateUserImage(authUser, multipartFile));
     }
 }

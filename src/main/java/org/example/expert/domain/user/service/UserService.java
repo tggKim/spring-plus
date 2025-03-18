@@ -62,7 +62,7 @@ public class UserService {
                 .orElseThrow(() -> new InvalidRequestException("User not found"));
 
         try{
-            s3Service.updateFile(multipartFile, user.getImageName());
+            s3Service.uploadFile(multipartFile, user.getImageName());
         }catch (IOException e){
 
         }
