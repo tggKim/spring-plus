@@ -1,6 +1,7 @@
 package org.example.expert.domain.auth.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.expert.aws.service.S3Service;
 import org.example.expert.config.JwtUtil;
 import org.example.expert.domain.auth.dto.request.SigninRequest;
 import org.example.expert.domain.auth.dto.request.SignupRequest;
@@ -14,6 +15,9 @@ import org.example.expert.domain.user.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -23,9 +27,10 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final S3Service s3Service;
 
     @Transactional
-    public SignupResponse signup(SignupRequest signupRequest) {
+    public SignupResponse signup(SignupRequest signupRequest, MultipartFile multipartFile) {
 
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
             throw new InvalidRequestException("이미 존재하는 이메일입니다.");
@@ -35,11 +40,19 @@ public class AuthService {
 
         UserRole userRole = UserRole.of(signupRequest.getUserRole());
 
+        String fileName = s3Service.createFileName(multipartFile);
+        try{
+            s3Service.uploadFile(multipartFile, fileName);
+        }catch (IOException e){
+
+        }
+
         User newUser = new User(
                 signupRequest.getEmail(),
                 encodedPassword,
                 userRole,
-                signupRequest.getNickname()
+                signupRequest.getNickname(),
+                fileName
         );
         User savedUser = userRepository.save(newUser);
 
