@@ -24,3 +24,11 @@
 - /health
 
 ![image](https://github.com/user-attachments/assets/1ac48e17-0bda-4e55-a6f6-8c9ea0d3f600)
+
+### S3
+
+![image](https://github.com/user-attachments/assets/343326b0-80f0-41b9-8371-ca2887d1dea5)
+
+![image](https://github.com/user-attachments/assets/c0047a7f-237c-4ed3-9d4a-66c9ce7cc30b)
+
+![image](https://github.com/user-attachments/assets/346f2a24-f71f-4f9e-8af5-60c34031293a)
