@@ -6,10 +6,13 @@ import org.example.expert.domain.user.dto.request.UserChangePasswordRequest;
 import org.example.expert.domain.user.dto.response.NewUserResponse;
 import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,5 +33,10 @@ public class UserController {
     @PutMapping("/users/images")
     public ResponseEntity<NewUserResponse> updateUserImage(@AuthenticationPrincipal AuthUser authUser, @RequestParam("file") MultipartFile multipartFile){
         return ResponseEntity.ok(userService.updateUserImage(authUser, multipartFile));
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<UserResponse>> findUserByNickname(@RequestParam String nickname){
+        return new ResponseEntity<>(userService.findByNickName(nickname), HttpStatus.OK);
     }
 }

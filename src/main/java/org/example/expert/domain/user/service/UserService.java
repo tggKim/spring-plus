@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -69,5 +71,9 @@ public class UserService {
 
         String imageUrl = s3Service.getImageUrl(user.getImageName());
         return new NewUserResponse(user.getId(), user.getEmail(), imageUrl);
+    }
+
+    public List<UserResponse> findByNickName(String nickname){
+        return userRepository.findByNickname(nickname).stream().map(user -> new UserResponse(user.getId(), user.getEmail())).collect(Collectors.toList());
     }
 }
