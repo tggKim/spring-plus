@@ -47,4 +47,6 @@
 - 최대 응답시간 향상: 99.93%
 - 평균 응답시간 향상: 99.95%
 
-https://velog.io/@tgg/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A1%B0%ED%9A%8C-%EC%B5%9C%EC%A0%81%ED%99%94-%ED%95%98%EA%B8%B0
+### 트러블 슈팅 기록
+
+https://velog.io/@tgg/%ED%94%8C%EB%9F%AC%EC%8A%A4-%EC%A3%BC%EC%B0%A8-%EA%B8%B0%EB%A1%9D
