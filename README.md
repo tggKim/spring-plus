@@ -32,3 +32,7 @@
 ![image](https://github.com/user-attachments/assets/c0047a7f-237c-4ed3-9d4a-66c9ce7cc30b)
 
 ![image](https://github.com/user-attachments/assets/346f2a24-f71f-4f9e-8af5-60c34031293a)
+
+### 조회 성능 개선
+
+https://velog.io/@tgg/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A1%B0%ED%9A%8C-%EC%B5%9C%EC%A0%81%ED%99%94-%ED%95%98%EA%B8%B0
