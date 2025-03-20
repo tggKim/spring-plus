@@ -35,4 +35,16 @@
 
 ### 조회 성능 개선
 
+- 단순 select 문으로 조회
+
+![성능 1](https://github.com/user-attachments/assets/e8d95ea5-1319-493b-9b03-e6da3dea2314)
+
+- nickname 컬럼에 대한 인덱스를 생성해서 조회
+
+![성능 2](https://github.com/user-attachments/assets/c55d0c72-90b6-46f7-accb-d90034d9681a)
+
+- 최소 응답시간 향상: 99.71%
+- 최대 응답시간 향상: 99.93%
+- 평균 응답시간 향상: 99.95%
+
 https://velog.io/@tgg/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A1%B0%ED%9A%8C-%EC%B5%9C%EC%A0%81%ED%99%94-%ED%95%98%EA%B8%B0
