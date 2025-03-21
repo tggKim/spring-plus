@@ -32,3 +32,21 @@
 ![image](https://github.com/user-attachments/assets/c0047a7f-237c-4ed3-9d4a-66c9ce7cc30b)
 
 ![image](https://github.com/user-attachments/assets/346f2a24-f71f-4f9e-8af5-60c34031293a)
+
+### 조회 성능 개선
+
+- 단순 select 문으로 조회
+
+![성능 1](https://github.com/user-attachments/assets/e8d95ea5-1319-493b-9b03-e6da3dea2314)
+
+- nickname 컬럼에 대한 인덱스를 생성해서 조회
+
+![성능 2](https://github.com/user-attachments/assets/c55d0c72-90b6-46f7-accb-d90034d9681a)
+
+- 최소 응답시간 향상: 99.71%
+- 최대 응답시간 향상: 99.93%
+- 평균 응답시간 향상: 99.95%
+
+### 트러블 슈팅 기록
+
+https://velog.io/@tgg/%ED%94%8C%EB%9F%AC%EC%8A%A4-%EC%A3%BC%EC%B0%A8-%EA%B8%B0%EB%A1%9D
